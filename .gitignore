@@ -1,0 +1,7 @@
+secrets.yml
+db-config.sqlite
+flexget.log*
+received/
+temp/
+userstatic/
+*.swp

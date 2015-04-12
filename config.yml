@@ -1,0 +1,188 @@
+secrets: secrets.yml
+templates:
+  relax:
+    torrent_alive: 0
+
+  tv:
+    series:
+      - Marvel's Agents of S H I E L D
+    configure_series:
+      from:
+        trakt_list:
+          username: '{{ secrets.trakt.usr }}'
+          password: '{{ secrets.trakt.pwd }}'
+          strip_dates: yes
+          list: Download
+          type: shows
+      settings:
+        qualities:
+          - "<=720p"
+          - hdtv-bluray
+          - "!480p"
+        timeframe: 12 hours
+        upgrade: yes
+    magnets: no
+    content_size:
+      min: 200
+    content_filter:
+      require:
+        - '*.avi'
+        - '*.mkv'
+        - '*.r00'
+      reject: 
+        - 'password.txt'
+        - '*.wmv'
+    exists_series:
+      path:
+        - '{{ secrets.paths.shows }}'
+        - '{{ secrets.paths.incomplete }}'
+      allow_different_qualities: better
+    thetvdb_lookup: yes
+    set:
+      path: '{{ secrets.paths.incomplete }}'
+      movedone: "{{ secrets.paths.shows }}/{{ series_name }}/Season {{ series_season }}"
+      content_filename: >
+        {{ series_name }} - {{ series_id }}
+        {% if ep_name|default(False) %}- {{ ep_name }} {% endif %}- {{ quality|upper }}
+        {% if proper_count %}- proper{% if proper_count > 1 %}{{ proper_count }}{% endif %}{% endif %}
+    deluge:
+      password: '{{ secrets.deluge.pwd }}'
+      label: tv_show
+      main_file_only: yes
+    trakt_add:
+      username: '{{ secrets.trakt.usr }}'
+      password: '{{ secrets.trakt.pwd }}'
+      list: library
+    pushbullet:
+      apikey: '{{ secrets.pushbullet.key }}'
+      device: '{{ secrets.pushbullet.phone }}'
+    
+
+  movies:
+    quality: 720p bluray
+    exists_movie:
+      - '{{ secrets.paths.movies }}'
+      - '{{ secrets.paths.incomplete }}'
+    seen_movies: loose
+    proper_movies: yes
+    #torrent_alive: 10
+    set:
+      path: '{{ secrets.paths.incomplete }}'
+      movedone: '{{ secrets.paths.movies }}'
+    deluge:
+      password: '{{ secrets.deluge.pwd }}'
+      label: movie
+      main_file_only: yes
+    trakt_add:
+      username: '{{ secrets.trakt.usr }}'
+      password: '{{ secrets.trakt.pwd }}'
+      list: collection
+    
+
+tasks:
+  #piratebay_hires_tv:
+  #  template: tv
+  #  rss: http://rss.thepiratebay.se/208
+  #  priority: 20
+
+  #piratebay_lores_tv:
+  #  template: tv
+  #  rss: http://rss.thepiratebay.se/205
+  #  priority: 20
+
+  kickass_hires_tv:
+    template: tv
+    rss: https://kickass.to/usearch/720p%20category%3Atv/?rss=1
+    priority: 11
+    verify_ssl_certificates: no
+
+  eztv:
+    template: tv
+    #rss: http://rss.thepiratebay.se/user/d17c6a45441ce0bc0c057f19057f95e1
+    rss: https://kickass.to/usearch/eztv%20720p%20category%3Atv/?rss=1
+    verify_ssl_certificates: no
+    priority: 1
+
+  publichd:
+    template: tv
+    #rss: http://maxters.net/apps/pbay/search/publichd/0/3/208
+    rss: https://kickass.to/usearch/publichd%20720p%20category%3Atv/?rss=1
+    verify_ssl_certificates: no
+    priority: 2
+
+  #showrss:
+  #  template: tv
+  #  rss: http://showrss.karmorra.info/rss.php?user_id=52263&hd=1&proper=1
+
+  torrentz_hires_shows:
+    template: tv
+    rss: http://torrentz.eu/feedA?q=tv+shows+highres+-porn
+    priority: 11
+
+  torrentz_lores_shows:
+    template: tv
+    rss: http://torrentz.eu/feedA?q=tv+shows+-porn
+    priority: 21
+
+  el_ministerio:
+    template: tv
+    rss:
+      url: http://kickass.to/usearch/El%20ministerio%20del%20tiempo/?rss=1
+      ascii: yes
+    priority: 25
+
+  #isohunt_hires_shows:
+  #  template: tv
+  #  rss: http://isohunt.com/js/rss/720p?iht=3&noSL
+  #  priority: 3
+
+
+  trakt_movies:
+    priority: 50
+    trakt_list:
+      username: '{{ secrets.trakt.usr }}'
+      password: '{{ secrets.trakt.pwd }}'
+      list: watchlist
+      type: movies
+    accept_all: yes
+    movie_queue:
+      action: add
+      quality: 720p bluray
+
+  discover_movies:
+    priority: 51
+    template: movies
+    discover:
+      what:
+        - emit_movie_queue: yes
+      from:
+        #- piratebay: yes
+        - torrentz: verified
+        - kat:
+            category: movies
+            verified: yes
+    movie_queue: add
+    pushbullet:
+      apikey: '{{ secrets.pushbullet.key }}'
+      device: '{{ secrets.pushbullet.phone }}'
+      body: '{{movie_name}} ({{movie_year}})'
+
+
+  scan_dir:
+    template: tv
+    listdir: '{{ secrets.paths.home }}'
+    accept_all: yes
+    manual: yes  # need to use flexget --task=scan_dir
+      #- tv
+      #- relax
+
+  from_file:
+    template: tv
+    tail:
+      file: '{{ secrets.paths.home }}/list'
+      entry:
+        title: 'TITLE: (.*) URL:'
+        url: 'URL: (.*)'
+    accept_all: yes
+    manual: yes
+
