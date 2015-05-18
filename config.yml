@@ -61,7 +61,7 @@ templates:
     
 
   movies:
-    quality: 720p bluray
+    quality: 720p+ hdtv+
     exists_movie:
       - '{{ secrets.paths.movies }}'
       - '{{ secrets.paths.incomplete }}'
