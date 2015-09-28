@@ -100,21 +100,21 @@ tasks:
 
   kickass_hires_tv:
     template: tv
-    rss: https://kickass.to/usearch/720p%20category%3Atv/?rss=1
+    rss: https://kat.cr/usearch/720p%20category%3Atv/?rss=1
     priority: 11
     verify_ssl_certificates: no
 
   eztv:
     template: tv
     #rss: http://rss.thepiratebay.se/user/d17c6a45441ce0bc0c057f19057f95e1
-    rss: https://kickass.to/usearch/eztv%20720p%20category%3Atv/?rss=1
+    rss: https://kat.cr/usearch/eztv%20720p%20category%3Atv/?rss=1
     verify_ssl_certificates: no
     priority: 1
 
   publichd:
     template: tv
     #rss: http://maxters.net/apps/pbay/search/publichd/0/3/208
-    rss: https://kickass.to/usearch/publichd%20720p%20category%3Atv/?rss=1
+    rss: https://kat.cr/usearch/publichd%20720p%20category%3Atv/?rss=1
     verify_ssl_certificates: no
     priority: 2
 
@@ -135,7 +135,7 @@ tasks:
   el_ministerio:
     template: tv
     rss:
-      url: http://kickass.to/usearch/El%20ministerio%20del%20tiempo/?rss=1
+      url: http://kat.cr/usearch/El%20ministerio%20del%20tiempo/?rss=1
       ascii: yes
     priority: 25
 
