@@ -16,6 +16,7 @@ templates:
           type: shows
       settings:
         qualities:
+          - "!h265"
           - "<=720p"
           - hdtv-bluray
           - "!480p"
@@ -32,6 +33,9 @@ templates:
       reject: 
         - 'password.txt'
         - '*.wmv'
+    regexp:
+      reject:
+        - hevc
     exists_series:
       path:
         - '{{ secrets.paths.shows }}'
@@ -61,7 +65,9 @@ templates:
     
 
   movies:
-    quality: 720p+ hdtv+
+    quality:
+      - 720p+
+      - hdtv+
     exists_movie:
       - '{{ secrets.paths.movies }}'
       - '{{ secrets.paths.incomplete }}'
