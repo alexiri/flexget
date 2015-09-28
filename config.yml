@@ -184,8 +184,8 @@ tasks:
 
   from_file:
     template: tv
-    tail:
-      file: '{{ secrets.paths.home }}/list'
+    text:
+      url: '{{ secrets.paths.home }}/list'
       entry:
         title: 'TITLE: (.*) URL:'
         url: 'URL: (.*)'
