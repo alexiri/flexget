@@ -153,9 +153,7 @@ tasks:
       list: watchlist
       type: movies
     accept_all: yes
-    movie_queue:
-      action: add
-      quality: 720p bluray
+    movie_queue: add
 
   discover_movies:
     priority: 51
