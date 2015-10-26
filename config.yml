@@ -176,7 +176,7 @@ tasks:
 
   scan_dir:
     template: tv
-    listdir: '{{ secrets.paths.home }}'
+    filesystem: '{{ secrets.paths.home }}'
     accept_all: yes
     manual: yes  # need to use flexget --task=scan_dir
       #- tv
