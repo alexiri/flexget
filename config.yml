@@ -56,7 +56,7 @@ templates:
     trakt_add:
       username: '{{ secrets.trakt.usr }}'
       password: '{{ secrets.trakt.pwd }}'
-      list: library
+      list: collection
     pushbullet:
       apikey: '{{ secrets.pushbullet.key }}'
       device: '{{ secrets.pushbullet.phone }}'
