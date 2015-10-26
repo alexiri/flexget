@@ -22,9 +22,8 @@ templates:
           - "!480p"
         timeframe: 12 hours
         upgrade: yes
-    magnets: no
-    content_size:
-      min: 200
+    #content_size:
+    #  min: 200
     content_filter:
       require:
         - '*.avi'
@@ -100,23 +99,35 @@ tasks:
 
   kickass_hires_tv:
     template: tv
-    rss: https://kat.cr/usearch/720p%20category%3Atv/?rss=1
-    priority: 11
+    rss:
+      url: https://kat.cr/usearch/720p%20category%3Atv/?rss=1
+      other_fields: ['torrent:magnetURI']
+      link: 'torrent:magnetURI'
+    magnets: yes
+    priority: 30
     verify_ssl_certificates: no
 
   eztv:
     template: tv
     #rss: http://rss.thepiratebay.se/user/d17c6a45441ce0bc0c057f19057f95e1
-    rss: https://kat.cr/usearch/eztv%20720p%20category%3Atv/?rss=1
+    rss:
+      url: https://kat.cr/usearch/eztv%20720p%20category%3Atv/?rss=1
+      other_fields: ['torrent:magnetURI']
+      link: 'torrent:magnetURI'
+    magnets: yes
     verify_ssl_certificates: no
-    priority: 1
+    priority: 10
 
   publichd:
     template: tv
     #rss: http://maxters.net/apps/pbay/search/publichd/0/3/208
-    rss: https://kat.cr/usearch/publichd%20720p%20category%3Atv/?rss=1
+    rss:
+      url: https://kat.cr/usearch/publichd%20720p%20category%3Atv/?rss=1
+      other_fields: ['torrent:magnetURI']
+      link: 'torrent:magnetURI'
+    magnets: yes
     verify_ssl_certificates: no
-    priority: 2
+    priority: 20
 
   #showrss:
   #  template: tv
@@ -136,7 +147,10 @@ tasks:
     template: tv
     rss:
       url: http://kat.cr/usearch/El%20ministerio%20del%20tiempo/?rss=1
+      other_fields: ['torrent:magnetURI']
+      link: 'torrent:magnetURI'
       ascii: yes
+    magnets: yes
     priority: 25
 
   #isohunt_hires_shows:
