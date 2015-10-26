@@ -84,6 +84,7 @@ templates:
       username: '{{ secrets.trakt.usr }}'
       password: '{{ secrets.trakt.pwd }}'
       list: collection
+    verify_ssl_certificates: no
     
 
 tasks:
