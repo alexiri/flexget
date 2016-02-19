@@ -11,7 +11,7 @@ templates:
       from:
         trakt_list:
           username: '{{ secrets.trakt.usr }}'
-          password: '{{ secrets.trakt.pwd }}'
+          account: '{{ secrets.trakt.usr }}'
           strip_dates: yes
           list: Download
           type: shows
@@ -55,7 +55,7 @@ templates:
       main_file_only: yes
     trakt_add:
       username: '{{ secrets.trakt.usr }}'
-      password: '{{ secrets.trakt.pwd }}'
+      account: '{{ secrets.trakt.usr }}'
       list: collection
     pushbullet:
       apikey: '{{ secrets.pushbullet.key }}'
@@ -83,7 +83,7 @@ templates:
       main_file_only: yes
     trakt_add:
       username: '{{ secrets.trakt.usr }}'
-      password: '{{ secrets.trakt.pwd }}'
+      account: '{{ secrets.trakt.usr }}'
       list: collection
     verify_ssl_certificates: no
     
@@ -165,7 +165,7 @@ tasks:
     priority: 50
     trakt_list:
       username: '{{ secrets.trakt.usr }}'
-      password: '{{ secrets.trakt.pwd }}'
+      account: '{{ secrets.trakt.usr }}'
       list: watchlist
       type: movies
     accept_all: yes
