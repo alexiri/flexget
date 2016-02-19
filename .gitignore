@@ -1,6 +1,8 @@
 secrets.yml
 db-config.sqlite
 flexget.log*
+crash_report.*
+log-config.jso*
 received/
 temp/
 userstatic/
