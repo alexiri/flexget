@@ -76,6 +76,9 @@ templates:
     seen_movies: loose
     proper_movies: yes
     #torrent_alive: 10
+    regexp:
+      reject:
+        - YIFY
     set:
       path: '{{ secrets.paths.incomplete }}'
       movedone: '{{ secrets.paths.movies }}'
