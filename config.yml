@@ -193,8 +193,9 @@ tasks:
         - kat:
             category: movies
             verified: yes
-    list_queue:
-      - movie_list: movies
+    list_match:
+      from:
+        - movie_list: movies
     pushbullet:
       apikey: '{{ secrets.pushbullet.key }}'
       device: '{{ secrets.pushbullet.phone }}'
