@@ -98,61 +98,73 @@ templates:
     
 
 tasks:
-  #piratebay_hires_tv:
-  #  template: tv
-  #  rss: http://rss.thepiratebay.se/208
-  #  priority: 20
-
-  #piratebay_lores_tv:
-  #  template: tv
-  #  rss: http://rss.thepiratebay.se/205
-  #  priority: 20
-
-  kickass_hires_tv:
+  piratebay_hires_tv:
     template: tv
-    rss:
-      url: https://kat.cr/usearch/720p%20category%3Atv/?rss=1
-      other_fields: ['torrent:magnetURI']
-      link: 'torrent:magnetURI'
-    magnets: yes
+    rss: https://thepiratebay.org/rss/new/208
+    priority: 20
+
+  piratebay_lores_tv:
+    template: tv
+    rss: https://thepiratebay.org/rss/new/205
+    priority: 20
+
+  extratorrent_tv:
+    template: tv
+    rss: http://extratorrent.cc/rss.xml?cid=8&type=last
     priority: 30
-    verify_ssl_certificates: no
+
+  extratorrent_hires_tv:
+    template: tv
+    rss: http://extratorrent.cc/rss.xml?type=search&search=720p&cid=8
+    priority: 30
+
+  #kickass_hires_tv:
+  #  template: tv
+  #  rss:
+  #    url: https://kat.cr/usearch/720p%20category%3Atv/?rss=1
+  #    other_fields: ['torrent:magnetURI']
+  #    link: 'torrent:magnetURI'
+  #  magnets: yes
+  #  priority: 30
+  #  verify_ssl_certificates: no
 
   eztv:
     template: tv
     #rss: http://rss.thepiratebay.se/user/d17c6a45441ce0bc0c057f19057f95e1
-    rss:
-      url: https://kat.cr/usearch/eztv%20720p%20category%3Atv/?rss=1
-      other_fields: ['torrent:magnetURI']
-      link: 'torrent:magnetURI'
-    magnets: yes
-    verify_ssl_certificates: no
+    rss: http://extratorrent.cc/rss.xml?type=search&search=eztv&cid=8
+    #rss:
+    #  url: https://kat.cr/usearch/eztv%20720p%20category%3Atv/?rss=1
+    #  other_fields: ['torrent:magnetURI']
+    #  link: 'torrent:magnetURI'
+    #magnets: yes
+    #verify_ssl_certificates: no
     priority: 10
 
   publichd:
     template: tv
     #rss: http://maxters.net/apps/pbay/search/publichd/0/3/208
-    rss:
-      url: https://kat.cr/usearch/publichd%20720p%20category%3Atv/?rss=1
-      other_fields: ['torrent:magnetURI']
-      link: 'torrent:magnetURI'
-    magnets: yes
-    verify_ssl_certificates: no
+    rss: http://extratorrent.cc/rss.xml?type=search&search=publichd&cid=8
+    #rss:
+    #  url: https://kat.cr/usearch/publichd%20720p%20category%3Atv/?rss=1
+    #  other_fields: ['torrent:magnetURI']
+    #  link: 'torrent:magnetURI'
+    #magnets: yes
+    #verify_ssl_certificates: no
     priority: 20
 
   #showrss:
   #  template: tv
   #  rss: http://showrss.karmorra.info/rss.php?user_id=52263&hd=1&proper=1
 
-  torrentz_hires_shows:
-    template: tv
-    rss: http://torrentz.eu/feedA?q=tv+shows+highres+-porn
-    priority: 11
+  #torrentz_hires_shows:
+  #  template: tv
+  #  rss: http://torrentz.eu/feedA?q=tv+shows+highres+-porn
+  #  priority: 11
 
-  torrentz_lores_shows:
-    template: tv
-    rss: http://torrentz.eu/feedA?q=tv+shows+-porn
-    priority: 21
+  #torrentz_lores_shows:
+  #  template: tv
+  #  rss: http://torrentz.eu/feedA?q=tv+shows+-porn
+  #  priority: 21
 
   el_ministerio:
     template: tv
@@ -190,11 +202,13 @@ tasks:
       what:
         - movie_list: movies
       from:
-        #- piratebay: yes
-        - torrentz: verified
-        - kat:
+        - piratebay: yes
+        #- torrentz: verified
+        - extratorrent:
             category: movies
-            verified: yes
+        #- kat:
+        #    category: movies
+        #    verified: yes
     list_match:
       from:
         - movie_list: movies
