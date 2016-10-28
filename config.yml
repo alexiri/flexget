@@ -110,12 +110,12 @@ tasks:
 
   extratorrent_tv:
     template: tv
-    rss: http://extratorrent.cc/rss.xml?cid=8&type=last
+    rss: https://extratorrent.cc/rss.xml?cid=8&type=last
     priority: 30
 
   extratorrent_hires_tv:
     template: tv
-    rss: http://extratorrent.cc/rss.xml?type=search&search=720p&cid=8
+    rss: https://extratorrent.cc/rss.xml?type=search&search=720p&cid=8
     priority: 30
 
   #kickass_hires_tv:
