@@ -43,6 +43,8 @@ templates:
       allow_different_qualities: better
     thetvdb_lookup: yes
     set:
+      series_name:
+        replace: ['.$', '']
       path: '{{ secrets.paths.incomplete }}'
       movedone: "{{ secrets.paths.shows }}/{{ series_name }}/Season {{ series_season }}"
       content_filename: >
