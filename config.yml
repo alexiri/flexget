@@ -17,7 +17,6 @@ templates:
           type: shows
       settings:
         qualities:
-          - "!h265"
           - "<=720p"
           - hdtv-bluray
           - "!480p"
@@ -33,9 +32,6 @@ templates:
       reject: 
         - 'password.txt'
         - '*.wmv'
-    regexp:
-      reject:
-        - hevc
     exists_series:
       path:
         - '{{ secrets.paths.shows }}'
@@ -44,13 +40,18 @@ templates:
     thetvdb_lookup: yes
     set:
       series_name:
-        replace: ['.$', '']
+        replace: ['From \[ WWW.TORRENTING.COM \] - ', '']
       path: '{{ secrets.paths.incomplete }}'
       movedone: "{{ secrets.paths.shows }}/{{ series_name }}/Season {{ series_season }}"
       content_filename: >
         {{ series_name }} - {{ series_id }}
         {% if ep_name|default(False) %}- {{ ep_name }} {% endif %}- {{ quality|upper }}
         {% if proper_count %}- proper{% if proper_count > 1 %}{{ proper_count }}{% endif %}{% endif %}
+    subliminal:
+      languages:
+        - eng
+      exact_match: yes
+      providers: [addic7ed, opensubtitles, tvsubtitles]
     deluge:
       password: '{{ secrets.deluge.pwd }}'
       label: tv_show
@@ -112,11 +113,13 @@ tasks:
     template: tv
     rss: https://extratorrent.cc/rss.xml?cid=8&type=last
     priority: 30
+    verify_ssl_certificates: no
 
   extratorrent_hires_tv:
     template: tv
     rss: https://extratorrent.cc/rss.xml?type=search&search=720p&cid=8
     priority: 30
+    verify_ssl_certificates: no
 
   #kickass_hires_tv:
   #  template: tv
