@@ -1,4 +1,4 @@
-secrets: secrets.yml
+variables: secrets.yml
 templates:
   relax:
     torrent_alive: 0
@@ -10,8 +10,8 @@ templates:
     configure_series:
       from:
         trakt_list:
-          username: '{{ secrets.trakt.usr }}'
-          account: '{{ secrets.trakt.usr }}'
+          username: '{? trakt.usr ?}'
+          account: '{? trakt.usr ?}'
           strip_dates: yes
           list: Download
           type: shows
@@ -34,15 +34,15 @@ templates:
         - '*.wmv'
     exists_series:
       path:
-        - '{{ secrets.paths.shows }}'
-        - '{{ secrets.paths.incomplete }}'
+        - '{? paths.shows ?}'
+        - '{? paths.incomplete ?}'
       allow_different_qualities: better
     thetvdb_lookup: yes
     set:
       series_name:
         replace: ['From \[ WWW.TORRENTING.COM \] - ', '']
-      path: '{{ secrets.paths.incomplete }}'
-      movedone: "{{ secrets.paths.shows }}/{{ series_name }}/Season {{ series_season }}"
+      path: '{? paths.incomplete ?}'
+      movedone: "{? paths.shows ?}/{{ series_name }}/Season {{ series_season }}"
       content_filename: >
         {{ series_name }} - {{ series_id }}
         {% if ep_name|default(False) %}- {{ ep_name }} {% endif %}- {{ quality|upper }}
@@ -53,20 +53,23 @@ templates:
       exact_match: yes
       providers: [addic7ed, opensubtitles, tvsubtitles]
     deluge:
-      password: '{{ secrets.deluge.pwd }}'
+      password: '{? deluge.pwd ?}'
       label: tv_show
       main_file_only: yes
     list_add:
       - trakt_list:
-          username: '{{ secrets.trakt.usr }}'
-          account: '{{ secrets.trakt.usr }}'
+          username: '{? trakt.usr ?}'
+          account: '{? trakt.usr ?}'
           list: collection
           type: episodes
-    pushbullet:
-      apikey: '{{ secrets.pushbullet.key }}'
-      device: '{{ secrets.pushbullet.phone }}'
-      title: '{{series_name}}'
-      body: '{{series_id}}'
+    notify:
+      entries:
+        title: '{{series_name}}'
+        message: '{{series_id}}'
+        via:
+          - pushbullet:
+              api_key: '{? pushbullet.key ?}'
+              device: '{? pushbullet.phone ?}'
     
 
   movies:
@@ -74,8 +77,8 @@ templates:
       - 720p+
       - hdtv+
     exists_movie:
-      - '{{ secrets.paths.movies }}'
-      - '{{ secrets.paths.incomplete }}'
+      - '{? paths.movies ?}'
+      - '{? paths.incomplete ?}'
     seen_movies: loose
     proper_movies: yes
     #torrent_alive: 10
@@ -83,16 +86,16 @@ templates:
       reject:
         - YIFY
     set:
-      path: '{{ secrets.paths.incomplete }}'
-      movedone: '{{ secrets.paths.movies }}'
+      path: '{? paths.incomplete ?}'
+      movedone: '{? paths.movies ?}'
     deluge:
-      password: '{{ secrets.deluge.pwd }}'
+      password: '{? deluge.pwd ?}'
       label: movie
       main_file_only: yes
     list_add:
       - trakt_list:
-          username: '{{ secrets.trakt.usr }}'
-          account: '{{ secrets.trakt.usr }}'
+          username: '{? trakt.usr ?}'
+          account: '{? trakt.usr ?}'
           list: collection
           type: movies
     verify_ssl_certificates: no
@@ -188,8 +191,8 @@ tasks:
   trakt_movies:
     priority: 50
     trakt_list:
-      username: '{{ secrets.trakt.usr }}'
-      account: '{{ secrets.trakt.usr }}'
+      username: '{? trakt.usr ?}'
+      account: '{? trakt.usr ?}'
       list: watchlist
       type: movies
     accept_all: yes
@@ -215,15 +218,18 @@ tasks:
     list_match:
       from:
         - movie_list: movies
-    pushbullet:
-      apikey: '{{ secrets.pushbullet.key }}'
-      device: '{{ secrets.pushbullet.phone }}'
-      body: '{{movie_name}} ({{movie_year}})'
+    notify:
+      entries:
+        title: '{{movie_name}} ({{movie_year}})'
+        via:
+          - pushbullet:
+              api_key: '{? pushbullet.key ?}'
+              device: '{? pushbullet.phone ?}'
 
 
   scan_dir:
     template: tv
-    filesystem: '{{ secrets.paths.home }}'
+    filesystem: '{? paths.home ?}'
     accept_all: yes
     manual: yes  # need to use flexget --task=scan_dir
       #- tv
@@ -232,7 +238,7 @@ tasks:
   from_file:
     template: tv
     text:
-      url: '{{ secrets.paths.home }}/list'
+      url: '{? paths.home ?}/list'
       entry:
         title: 'TITLE: (.*) URL:'
         url: 'URL: (.*)'
