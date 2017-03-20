@@ -17,9 +17,9 @@ templates:
           type: shows
       settings:
         qualities:
-          - "<=720p"
-          - hdtv-bluray
-          - "!480p"
+          - 720p+
+          - webrip+
+          - "!10bit"
         timeframe: 12 hours
         upgrade: yes
     #content_size:
