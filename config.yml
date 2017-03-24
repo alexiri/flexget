@@ -4,6 +4,7 @@ templates:
     torrent_alive: 0
 
   tv:
+    #proxy: http://localhost:8118
     series:
       - Marvel's Agents of S H I E L D
       - El Ministerio del Tiempo
@@ -133,21 +134,21 @@ tasks:
     priority: 30
     verify_ssl_certificates: no
 
-  extratorrent_hires_tv:
-    template: tv
-    rss: https://extratorrent.cc/rss.xml?type=search&search=720p&cid=8
-    priority: 30
-    verify_ssl_certificates: no
-
-  #kickass_hires_tv:
+  #extratorrent_hires_tv:
   #  template: tv
-  #  rss:
-  #    url: https://kat.cr/usearch/720p%20category%3Atv/?rss=1
-  #    other_fields: ['torrent:magnetURI']
-  #    link: 'torrent:magnetURI'
-  #  magnets: yes
+  #  rss: https://extratorrent.cc/rss.xml?type=search&search=720p&cid=8
   #  priority: 30
   #  verify_ssl_certificates: no
+
+  kickass_tv:
+    template: tv
+    rss:
+      url: http://katcr.to/tv/?rss=1
+      other_fields: ['torrent:magnetURI']
+      link: 'torrent:magnetURI'
+    magnets: yes
+    priority: 30
+    verify_ssl_certificates: no
 
   eztv:
     template: tv
@@ -187,15 +188,15 @@ tasks:
   #  rss: http://torrentz.eu/feedA?q=tv+shows+-porn
   #  priority: 21
 
-  el_ministerio:
-    template: tv
-    rss:
-      url: http://kat.cr/usearch/El%20ministerio%20del%20tiempo/?rss=1
-      other_fields: ['torrent:magnetURI']
-      link: 'torrent:magnetURI'
-      ascii: yes
-    magnets: yes
-    priority: 25
+  #el_ministerio:
+  #  template: tv
+  #  rss:
+  #    url: http://kat.cr/usearch/El%20ministerio%20del%20tiempo/?rss=1
+  #    other_fields: ['torrent:magnetURI']
+  #    link: 'torrent:magnetURI'
+  #    ascii: yes
+  #  magnets: yes
+  #  priority: 25
 
   #isohunt_hires_shows:
   #  template: tv
