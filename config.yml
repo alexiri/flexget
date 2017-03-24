@@ -104,12 +104,27 @@ templates:
 tasks:
   piratebay_hires_tv:
     template: tv
-    rss: https://thepiratebay.org/rss/new/208
+    #rss: https://thepiratebay.org/rss/new/208
+    #rss: http://uj3wazyk5u4hnvtk.onion/rss/new/208
+    html:
+      url: https://thepiratebay.org/browse/208/{{i}}/3/0
+      links_re: [ magnet ]
+      title_from: url
+      increment:
+        from: 0
+        to: 3
     priority: 20
 
   piratebay_lores_tv:
     template: tv
-    rss: https://thepiratebay.org/rss/new/205
+    #rss: https://thepiratebay.org/rss/new/205
+    html:
+      url: https://thepiratebay.org/browse/205/{{i}}/3/0
+      links_re: [ magnet ]
+      title_from: url
+      increment:
+        from: 0
+        to: 3
     priority: 20
 
   extratorrent_tv:
