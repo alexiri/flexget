@@ -24,7 +24,7 @@ templates:
         timeframe: 12 hours
         upgrade: yes
     #content_size:
-    #  min: 200
+    #  min: 300
     content_filter:
       require:
         - '*.avi'
@@ -48,11 +48,6 @@ templates:
         {{ series_name }} - {{ series_id }}
         {% if ep_name|default(False) %}- {{ ep_name }} {% endif %}- {{ quality|upper }}
         {% if proper_count %}- proper{% if proper_count > 1 %}{{ proper_count }}{% endif %}{% endif %}
-    subliminal:
-      languages:
-        - eng
-      exact_match: yes
-      providers: [addic7ed, opensubtitles, tvsubtitles]
     deluge:
       password: '{? deluge.pwd ?}'
       label: tv_show
@@ -63,6 +58,8 @@ templates:
           account: '{? trakt.usr ?}'
           list: collection
           type: episodes
+      - subtitle_list:
+          list: subtitles
     notify:
       entries:
         title: '{{series_name}}'
@@ -99,10 +96,34 @@ templates:
           account: '{? trakt.usr ?}'
           list: collection
           type: movies
+      - subtitle_list:
+          list: subtitles
     verify_ssl_certificates: no
     
 
 tasks:
+  get_subs:
+    no_entries_ok: yes
+    subtitle_list:
+      list: subtitles
+      recursion_depth: 3
+    list_match:
+      from:
+        - subtitle_list:
+            list: subtitles
+    subliminal:
+      languages:
+        - en
+      providers: [opensubtitles, addic7ed, tvsubtitles]
+      authentication:
+        opensubtitles:
+          username: '{? opensubtitles.user ?}'
+          password: '{? opensubtitles.pwd ?}'
+        addic7ed:
+          username: '{? addic7ed.user ?}'
+          password: '{? addic7ed.pwd ?}'
+      exact_match: no
+
   piratebay_hires_tv:
     template: tv
     #rss: https://thepiratebay.org/rss/new/208
