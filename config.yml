@@ -41,7 +41,7 @@ templates:
     thetvdb_lookup: yes
     set:
       series_name:
-        replace: ['From \[ WWW.TORRENTING.COM \] - ', '']
+        replace: ['.*www\.torrenting\.com( \])? - ', '']
       path: '{? paths.incomplete ?}'
       movedone: "{? paths.shows ?}/{{ series_name }}/Season {{ series_season }}"
       content_filename: >
