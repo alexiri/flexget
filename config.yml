@@ -33,6 +33,7 @@ templates:
       reject: 
         - 'password.txt'
         - '*.wmv'
+        - '*.wma'
     exists_series:
       path:
         - '{? paths.shows ?}'
