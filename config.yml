@@ -44,10 +44,6 @@ templates:
         replace: ['.*www\.torrenting\.com( \])? - ', '']
       path: '{? paths.incomplete ?}'
       movedone: "{? paths.shows ?}/{{ series_name }}/Season {{ series_season }}"
-      content_filename: >
-        {{ series_name }} - {{ series_id }}
-        {% if ep_name|default(False) %}- {{ ep_name }} {% endif %}- {{ quality|upper }}
-        {% if proper_count %}- proper{% if proper_count > 1 %}{{ proper_count }}{% endif %}{% endif %}
     deluge:
       password: '{? deluge.pwd ?}'
       label: tv_show
