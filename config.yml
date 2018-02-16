@@ -243,8 +243,8 @@ tasks:
       from:
         - piratebay: yes
         #- torrentz: verified
-        - extratorrent:
-            category: movies
+        #- extratorrent:
+        #    category: movies
         #- kat:
         #    category: movies
         #    verified: yes
