@@ -37,16 +37,16 @@ templates:
     exists_series:
       path:
         - '{? paths.shows ?}'
-        - '{? paths.incomplete ?}'
       allow_different_qualities: better
     thetvdb_lookup: yes
     set:
       series_name:
         replace: ['.*www\.torrenting\.com( \])? - ', '']
-      path: '{? paths.incomplete ?}'
-      movedone: "{? paths.shows ?}/{{ series_name }}/Season {{ series_season }}"
+      path: "{? paths.shows ?}/{{ series_name }}/Season {{ series_season }}"
     deluge:
+      username: '{? deluge.user ?}'
       password: '{? deluge.pwd ?}'
+      host: '{? deluge.host ?}'
       label: tv_show
       main_file_only: yes
     list_add:
@@ -54,7 +54,7 @@ templates:
           username: '{? trakt.usr ?}'
           account: '{? trakt.usr ?}'
           list: collection
-          type: episodes
+          type: shows
       - subtitle_list:
           list: subtitles
     notify:
@@ -73,7 +73,6 @@ templates:
       - hdtv+
     exists_movie:
       - '{? paths.movies ?}'
-      - '{? paths.incomplete ?}'
     seen_movies: loose
     proper_movies: yes
     #torrent_alive: 10
@@ -81,10 +80,11 @@ templates:
       reject:
         - YIFY
     set:
-      path: '{? paths.incomplete ?}'
-      movedone: '{? paths.movies ?}'
+      path: '{? paths.movies ?}'
     deluge:
+      username: '{? deluge.user ?}'
       password: '{? deluge.pwd ?}'
+      host: '{? deluge.host ?}'
       label: movie
       main_file_only: yes
     list_add:
@@ -279,3 +279,12 @@ tasks:
     accept_all: yes
     manual: yes
 
+web_server:
+  web_ui: yes
+  run_v2: true
+
+# Run tasks every hour
+schedules:
+  - tasks: '*'
+    interval:
+      hours: 1
