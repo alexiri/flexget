@@ -24,6 +24,13 @@ templates:
         upgrade: yes
     #content_size:
     #  min: 300
+    regexp:
+      reject:
+        - \bfre(nch)?\b
+        - \bita(lian)?\b
+        - \bger(man)?\b
+        - \brus(sian)?\b
+        - \bvost(fr)?\b
     content_filter:
       require:
         - '*.avi'
