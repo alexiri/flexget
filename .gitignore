@@ -7,3 +7,5 @@ received/
 temp/
 userstatic/
 *.swp
+.config-lock
+cached_resources/
