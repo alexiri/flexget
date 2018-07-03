@@ -73,7 +73,6 @@ templates:
               api_key: '{? pushbullet.key ?}'
               device: '{? pushbullet.phone ?}'
     
-
   movies:
     quality:
       - 720p+
@@ -106,6 +105,18 @@ templates:
     
 
 tasks:
+  pushtest:
+    template: tv
+    manual: yes
+    accept_all: yes
+    disable:
+      - seen
+      - tracking
+      - deluge
+      - list_add
+    mock:
+      - {title: "Test.Pilot.S01E01.720p.mkv", series_name: "Test Pilot", series_id: "S01E01" }
+
   get_subs:
     no_entries_ok: yes
     subtitle_list:
