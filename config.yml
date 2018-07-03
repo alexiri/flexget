@@ -31,6 +31,7 @@ templates:
         - \bger(man)?\b
         - \brus(sian)?\b
         - \bvost(fr)?\b
+        - \bhindi?\b
     content_filter:
       require:
         - '*.avi'
@@ -158,11 +159,10 @@ tasks:
     priority: 30
     verify_ssl_certificates: no
 
-  #extratorrent_hires_tv:
-  #  template: tv
-  #  rss: https://extratorrent.cc/rss.xml?type=search&search=720p&cid=8
-  #  priority: 30
-  #  verify_ssl_certificates: no
+  limetorrents_tv:
+    template: tv
+    rss: https://www.limetorrents.cc/rss/20/
+    priority: 30
 
   kickass_tv:
     template: tv
@@ -185,6 +185,13 @@ tasks:
     #magnets: yes
     #verify_ssl_certificates: no
     priority: 10
+
+  rarbg:
+    template: tv
+    rss: https://rarbg.to/rssdd.php?category=41;49
+    magnets: yes
+    #verify_ssl_certificates: no
+    priority: 20
 
   publichd:
     template: tv
@@ -249,12 +256,11 @@ tasks:
         - movie_list: movies
       from:
         - piratebay: yes
-        #- torrentz: verified
-        #- extratorrent:
-        #    category: movies
-        #- kat:
-        #    category: movies
-        #    verified: yes
+        - rarbg:
+            category:
+              - x264 1080p
+              - x264 720p
+              - Full BD
     list_match:
       from:
         - movie_list: movies
