@@ -71,7 +71,7 @@ templates:
     notify:
       entries:
         title: '{{series_name}}'
-        message: '{{series_id}}'
+        message: '{{series_id}} ({{quality}})'
         via:
           - pushbullet:
               api_key: '{? pushbullet.key ?}'
