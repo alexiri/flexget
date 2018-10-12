@@ -21,6 +21,7 @@ templates:
           - 720p+
           - webrip+
         timeframe: 12 hours
+        target: 1080p+
         upgrade: yes
     #content_size:
     #  min: 300
@@ -64,6 +65,9 @@ templates:
           type: shows
       - subtitle_list:
           list: subtitles
+          path: '{{path}}'
+          remove_after: "4 weeks"
+          check_subtitles: yes
     notify:
       entries:
         title: '{{series_name}}'
