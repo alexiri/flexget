@@ -51,11 +51,10 @@ templates:
       series_name:
         replace: ['.*www\.torrenting\.com( \])? - ', '']
       path: "{? paths.shows ?}/{{ series_name }}/Season {{ series_season }}"
-    deluge:
-      username: '{? deluge.user ?}'
-      password: '{? deluge.pwd ?}'
-      host: '{? deluge.host ?}'
-      label: tv_show
+    transmission:
+      username: '{? transmission.user ?}'
+      password: '{? transmission.pwd ?}'
+      host: '{? transmission.host ?}'
       main_file_only: yes
     list_add:
       - trakt_list:
@@ -91,11 +90,10 @@ templates:
         - YIFY
     set:
       path: '{? paths.movies ?}'
-    deluge:
-      username: '{? deluge.user ?}'
-      password: '{? deluge.pwd ?}'
-      host: '{? deluge.host ?}'
-      label: movie
+    transmission:
+      username: '{? transmission.user ?}'
+      password: '{? transmission.pwd ?}'
+      host: '{? transmission.host ?}'
       main_file_only: yes
     list_add:
       - trakt_list:
