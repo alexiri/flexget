@@ -20,7 +20,7 @@ templates:
         qualities:
           - 720p+
         timeframe: 12 hours
-        target: 1080p+
+        target: 2160p
         upgrade: yes
     #content_size:
     #  min: 300
