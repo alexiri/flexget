@@ -352,4 +352,4 @@ web_server:
 schedules:
   - tasks: '*'
     interval:
-      hours: 1
+      minutes: 30
