@@ -14,7 +14,7 @@ templates:
           username: '{? trakt.usr ?}'
           account: '{? trakt.usr ?}'
           strip_dates: yes
-          list: Download
+          list: Download Shows
           type: shows
       settings:
         qualities:
