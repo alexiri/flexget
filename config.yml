@@ -146,6 +146,32 @@ tasks:
           password: '{? addic7ed.pwd ?}'
       exact_match: no
 
+  dupes:
+    disable: seen
+    #seen: local
+    filesystem:
+      path:
+        - '{? paths.shows ?}'
+        #- /volume1/xbmc/Shows-test
+      recursive: yes
+      retrieve: dirs
+    assume_quality:
+      h264: 480p
+    configure_series:
+      settings:
+        parse_only: yes
+        tracking: no
+      from:
+        filesystem: '{? paths.shows ?}'
+        #filesystem: /volume1/xbmc/Shows-test
+    duplicates:
+      field: id
+      action: accept
+    exec:
+      on_output:
+        for_accepted:
+          - (cat /config/dupes/`date +%Y%m%d`.dupes.out; echo "{{series_name}} {{series_id}} {{quality}} {{proper}}  {{location}}") | sort -u -o /config/dupes/`date +%Y%m%d`.dupes.out
+
   piratebay_hires_tv:
     template: tv
     #rss: https://thepiratebay.org/rss/new/208
